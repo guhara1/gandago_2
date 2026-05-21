@@ -769,6 +769,17 @@ details[open] {
   box-shadow: 0 16px 36px rgba(15, 95, 68, 0.18);
 }
 
+.footer-contact {
+  display: grid;
+  gap: 10px;
+  justify-items: end;
+}
+
+.footer-email {
+  color: var(--green-dark);
+  font-weight: 950;
+}
+
 .footer-grid {
   display: grid;
   grid-template-columns: minmax(250px, 1.15fr) repeat(3, minmax(160px, 1fr));
@@ -944,6 +955,11 @@ details[open] {
   }
 
   .footer-call {
+    width: 100%;
+  }
+
+  .footer-contact {
+    justify-items: stretch;
     width: 100%;
   }
 }
