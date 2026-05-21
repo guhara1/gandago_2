@@ -1,0 +1,216 @@
+import fs from "node:fs/promises";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const incheonPath = path.join(root, "areas", "incheon", "index.html");
+const sourceHtml = await fs.readFile(incheonPath, "utf8");
+const header = sourceHtml.match(/<header class="site-header"[\s\S]*?<\/header>/)?.[0];
+const footers = sourceHtml.match(/<footer>[\s\S]*?<\/footer>/g) ?? [];
+const footer = footers.at(-1);
+
+if (!header || !footer) throw new Error("Could not find shared header or footer.");
+
+const koCollator = new Intl.Collator("ko-KR");
+const sortByKoreanName = (items) => [...items].sort((a, b) => koCollator.compare(a.name, b.name));
+
+const districts = [
+  { name: "강화군", slug: "ganghwa", board: "강화읍·선원·길상", intro: "강화군은 섬 지역 이동과 교량 접근 시간이 함께 작용해 예약 전 실제 위치와 방문 가능 시간을 넓게 확인해야 합니다.", points: ["강화대교·초지대교 동선", "숙소·펜션 방문 조건", "장거리 이동 시간 확인"], areas: ["강화읍", "선원·불은", "길상·화도"] },
+  { name: "계양구", slug: "gyeyang", board: "계산·작전·효성", intro: "계양구는 서울 서부와 부천, 김포 동선이 겹쳐 퇴근 시간대 이동 변수와 주차 가능 여부를 함께 확인하는 편이 정확합니다.", points: ["계산역 생활권", "작전·효성 주거권", "서울 서부 인접 동선"], areas: ["계산", "작전·효성", "귤현·동양"] },
+  { name: "남동구", slug: "namdong", board: "구월·논현·간석", intro: "남동구는 구월 상권과 논현 주거권, 간석 생활권의 방문 조건이 달라 주소 기준 상담이 필요합니다.", points: ["구월동 상권", "논현 주거권", "간석 이동 조건"], areas: ["구월", "논현", "간석·만수"] },
+  { name: "동구", slug: "dong", board: "송림·화수·만석", intro: "동구는 항만과 구도심 생활권이 가까워 보이지만 건물 출입 방식과 주차 조건에 따라 안내가 달라질 수 있습니다.", points: ["송림 구도심", "화수·만석 이동", "항만 인접 동선"], areas: ["송림", "화수", "만석"] },
+  { name: "미추홀구", slug: "michuhol", board: "주안·용현·학익", intro: "미추홀구는 주안 상권과 용현·학익 주거권이 섞여 있어 방문 장소 유형과 시간대를 먼저 구분해야 합니다.", points: ["주안역 상권", "용현 주거권", "학익·문학 이동"], areas: ["주안", "용현", "학익·문학"] },
+  { name: "부평구", slug: "bupyeong", board: "부평·삼산·청천", intro: "부평구는 유동 인구와 주거지가 함께 밀집해 있어 퇴근 시간, 건물 출입, 대기 가능 여부를 함께 확인합니다.", points: ["부평역 상권", "삼산 주거권", "청천·갈산 이동"], areas: ["부평", "삼산", "청천·갈산"] },
+  { name: "서구", slug: "seo", board: "청라·검단·가정", intro: "서구는 청라와 검단, 가정 생활권의 거리가 넓어 실제 주소와 이전 예약 위치에 따라 방문 가능 시간이 달라집니다.", points: ["청라 신도시", "검단 생활권", "가정·석남 이동"], areas: ["청라", "검단", "가정·석남"] },
+  { name: "연수구", slug: "yeonsu", board: "송도·연수·청학", intro: "연수구는 송도 숙소와 오피스텔, 연수·청학 주거권의 출입 방식이 달라 상담 전 위치 확인이 중요합니다.", points: ["송도 숙소 출입", "연수 주거권", "청학·동춘 이동"], areas: ["송도", "연수", "청학·동춘"] },
+  { name: "옹진군", slug: "ongjin", board: "영흥·백령·덕적", intro: "옹진군은 도서 지역 특성상 즉시 방문보다 연결 동선과 실제 배정 가능성을 먼저 확인해야 합니다.", points: ["도서 지역 상담", "영흥 생활권", "방문 가능성 별도 확인"], areas: ["영흥", "백령", "덕적"] },
+  { name: "중구", slug: "jung", board: "영종·운서·동인천", intro: "중구는 영종 공항권과 동인천 구도심의 이동 축이 달라 숙소·호텔·주거지 출입 조건을 구분해 상담합니다.", points: ["영종·운서 숙소", "동인천 구도심", "공항권 이동 조건"], areas: ["영종·운서", "동인천", "신포·신흥"] },
+];
+
+const priceCards = `
+        <div class="local-price-grid">
+          <article class="local-price-card"><h3>타이마사지 건식</h3><p>스트레칭과 압 조절 중심의 기본 건식 관리입니다.</p><dl><div><dt>60분</dt><dd>70,000원</dd></div><div><dt>90분</dt><dd>90,000원</dd></div><div><dt>120분</dt><dd>110,000원</dd></div></dl></article>
+          <article class="local-price-card"><h3>아로마마사지 습식</h3><p>오일 사용 여부와 향 민감도를 먼저 확인합니다.</p><dl><div><dt>60분</dt><dd>80,000원</dd></div><div><dt>90분</dt><dd>100,000원</dd></div><div><dt>120분</dt><dd>120,000원</dd></div></dl></article>
+          <article class="local-price-card"><h3>감성케어 오일</h3><p>이완감 중심으로 강도와 진행 범위를 상담합니다.</p><dl><div><dt>60분</dt><dd>90,000원</dd></div><div><dt>90분</dt><dd>110,000원</dd></div><div><dt>120분</dt><dd>130,000원</dd></div></dl></article>
+          <article class="local-price-card"><h3>VVIP 전신케어</h3><p>건식과 오일 흐름을 길게 구성하는 전신 관리입니다.</p><dl><div><dt>60분</dt><dd>100,000원</dd></div><div><dt>90분</dt><dd>120,000원</dd></div><div><dt>120분</dt><dd>140,000원</dd></div><div><dt>150분</dt><dd>170,000원</dd></div></dl></article>
+          <article class="local-price-card"><h3>한국인 스웨디시</h3><p>소통 편의와 강도 조절을 원하는 예약 기준입니다.</p><dl><div><dt>60분</dt><dd>140,000원</dd></div><div><dt>90분</dt><dd>180,000원</dd></div></dl></article>
+          <article class="local-price-card"><h3>남성 스웨디시</h3><p>관리사 배정과 방문 조건을 전화로 먼저 확인합니다.</p><dl><div><dt>60분</dt><dd>90,000원</dd></div><div><dt>90분</dt><dd>120,000원</dd></div><div><dt>120분</dt><dd>150,000원</dd></div></dl></article>
+        </div>`;
+
+function directoryHtml() {
+  const cards = sortByKoreanName(districts).map((district) => `          <a class="district-link-card" href="/areas/incheon/${district.slug}/"><strong>${district.name}</strong><span>${district.board} 생활권 기준 확인</span></a>`).join("\n");
+  return `      <section class="district-directory" aria-label="인천 군구별 출장마사지 안내">
+        <div class="area-section-head">
+          <div><p class="eyebrow">Incheon districts</p><h2>인천 10개 군·구별 가능 지역 안내</h2></div>
+          <p>2026년 5월 21일 현재 행정구역 기준으로 강화군, 계양구, 남동구, 동구, 미추홀구, 부평구, 서구, 연수구, 옹진군, 중구를 가나다순으로 정리했습니다.</p>
+        </div>
+        <div class="district-directory-grid">
+${cards}
+        </div>
+      </section>
+
+`;
+}
+
+function districtPage(district) {
+  const title = `${district.name} 출장마사지, ${district.board} 방문 전 확인할 상담 기준 | 마사지KING`;
+  const description = `${district.intro} ${district.areas.join("·")} 예약 전 주소, 출입 방식, 희망 시간대를 기준으로 안내합니다.`;
+  const areaCards = district.areas.map((area) => `<article class="area-zone-card"><span>${district.name}</span><h3>${area}</h3><p>${area} 권역은 같은 ${district.name} 안에서도 건물 유형, 주차, 대기 가능 여부에 따라 방문 조건이 달라질 수 있습니다.</p><strong>주소 기준 확인</strong></article>`).join("\n          ");
+  const reviews = [
+    [`${district.areas[0]}`, "주소 확인", `${district.areas[0]} 문의에서 동 이름보다 상세 주소를 먼저 확인하니 안내가 빨라졌습니다. 가능 여부를 단정하지 않고 현재 배정 상황 기준으로 설명해 판단하기 쉬웠습니다.`],
+    [`${district.areas[1]}`, "시간 조정", `${district.areas[1]} 쪽은 희망 시간이 좁으면 안내가 달라질 수 있다고 했습니다. 가능한 시간대를 함께 제시하니 상담이 길어지지 않았습니다.`],
+    [`${district.areas[2]}`, "출입 방식", `${district.areas[2]} 방문 전 건물 출입 방식과 대기 가능 여부를 확인했습니다. 현장 조건을 미리 묻는 흐름이라 예약 전 준비가 명확했습니다.`],
+    [district.board, "가격 확인", `${district.name} 기준 가격표를 먼저 보고 전화했지만, 실제 안내는 위치와 시간대 확인 후 달라질 수 있다고 설명받았습니다.`],
+    [district.points[0], "이동 동선", `${district.points[0]} 조건을 먼저 확인해 무리한 약속을 잡지 않는 점이 좋았습니다. 방문 가능성을 현실적으로 안내받았습니다.`],
+    [district.points[2], "상담 메모", "전화 전 주소, 희망 시간, 방문 장소 유형을 준비하라는 안내가 있어 상담 흐름이 간단했습니다. 과장된 표현보다 확인 기준이 분명했습니다."],
+  ].map(([area, label, text]) => `<article class="local-review-card"><header><strong>${area}</strong><span>${label}</span></header><p>${text}</p><footer>익명 이용 메모 · 2026</footer></article>`).join("\n          ");
+
+  return `<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>${title}</title>
+    <meta name="description" content="${description}">
+    <meta name="robots" content="noindex,follow,max-image-preview:large">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="canonical" href="https://gandago.xyz/">
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="ko_KR">
+    <meta property="og:title" content="${title}">
+    <meta property="og:description" content="${description}">
+    <meta property="og:image" content="https://gandago-2.pages.dev/assets/hero-wellness.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/content.css">
+  </head>
+  <body>
+    ${header}
+
+    <main class="content-page area-page">
+      <section class="page-hero">
+        <p class="eyebrow">Incheon district</p>
+        <h1>${district.name} 출장마사지 가능 지역 안내</h1>
+        <p>${district.intro}</p>
+        <div class="area-hero-proof" aria-label="${district.name} 빠른 예약 포인트">
+          <strong>${district.name} 즉시 확인</strong>
+          <span>${district.points[0]}</span>
+          <span>${district.points[1]}</span>
+          <a href="tel:05082024743">${district.name} 전화예약</a>
+        </div>
+        <div class="area-hero-card" aria-label="${district.name} 상담 보드">
+          <span>${district.name} 상담 보드</span>
+          <h2>${district.name}은 방문 위치와 출입 조건을 먼저 확인하세요</h2>
+          <p class="area-hero-cta">${district.board} 생활권은 이동 축과 현장 조건이 다릅니다. 전화로 현재 배정 가능 흐름을 먼저 확인하세요.</p>
+          <ul>
+            <li>${district.points[0]}</li>
+            <li>${district.points[1]}</li>
+            <li>${district.points[2]}</li>
+          </ul>
+          <a href="tel:05082024743">0508-202-4743 ${district.name} 예약</a>
+        </div>
+        <dl class="page-meta" aria-label="콘텐츠 정보">
+          <div><dt>작성</dt><dd>마사지KING 운영팀</dd></div>
+          <div><dt>검수</dt><dd>예약 상담 기준 확인</dd></div>
+          <div><dt>업데이트</dt><dd>2026-05-21</dd></div>
+        </dl>
+      </section>
+
+      <section class="area-dashboard" aria-label="${district.name} 출장마사지 권역 안내">
+        <div class="area-dashboard-head">
+          <p class="eyebrow">${district.name} board</p>
+          <h2>${district.name}은 군·구명보다 실제 방문 조건이 중요합니다</h2>
+          <p>${district.intro} 같은 ${district.name} 안에서도 숙소, 오피스텔, 주거지, 사무실에 따라 상담 기준이 달라질 수 있습니다.</p>
+        </div>
+        <div class="area-zone-grid">
+          ${areaCards}
+        </div>
+        <div class="area-signal-panel">
+          <div><b>${district.name} 체크</b><span>상세 주소와 출입 정보를 먼저 준비</span></div>
+          <div><b>주의 시간</b><span>퇴근 시간대와 야간 방문 조건 확인</span></div>
+          <div><b>예약 문의</b><span>0508-202-4743</span></div>
+        </div>
+      </section>
+
+      <section class="area-commerce" aria-label="${district.name} 출장마사지 메뉴 가격">
+        <div class="area-section-head">
+          <div><p class="eyebrow">${district.name} price</p><h2>${district.name} 예약 전 확인하는 메뉴 가격</h2></div>
+          <p>아래 금액은 전화 상담 전 참고하는 기준가입니다. 실제 안내는 위치, 시간대, 이동 조건, 방문 환경 확인 후 달라질 수 있습니다.</p>
+        </div>
+${priceCards}
+        <div class="area-price-note"><p>가격표는 기준 안내이며, 야간 시간·이동 거리·현장 조건에 따라 상담 내용이 달라질 수 있습니다.</p><a href="tel:05082024743">${district.name} 가격 전화 확인</a></div>
+      </section>
+
+      <section class="area-reviews" aria-label="${district.name} 출장마사지 이용 메모">
+        <div class="area-section-head">
+          <div><p class="eyebrow">${district.name} reviews</p><h2>${district.name} 이용자가 자주 확인한 상담 포인트</h2></div>
+          <p>후기는 과장된 만족 표현이 아니라 예약자가 실제로 확인한 주소, 시간, 출입 방식, 준비사항 중심의 익명 메모입니다.</p>
+        </div>
+        <div class="local-review-grid">
+          ${reviews}
+        </div>
+        <div class="area-review-note"><p>개인정보를 제외한 이용 메모의 요약이며, 치료 효과나 확정 보장을 약속하지 않습니다.</p></div>
+      </section>
+
+      <section class="content-long" aria-label="${district.name} 출장마사지 가능 지역 안내 상세 안내">
+        <article class="content-panel">
+          <h2>핵심 요약</h2>
+          <p>${district.name} 출장마사지 가능 여부는 군·구 이름만으로 정해지지 않고 실제 주소, 희망 시간, 방문 장소 조건을 함께 확인해야 합니다.</p>
+          <p>이 페이지는 검색 유입만을 위해 지역명을 반복하는 문서가 아니라, 예약자가 전화 전에 준비할 정보를 정리한 안내입니다. ${district.areas.join(", ")}처럼 생활권이 나뉘는 지역은 같은 ${district.name} 안에서도 도착 가능 시간과 출입 방식이 달라질 수 있습니다.</p>
+          <p>그래서 “무조건 가능합니다”라고 말하기보다 현재 위치와 시간 기준으로 확인하는 방식을 우선합니다.</p>
+        </article>
+        <article class="content-panel">
+          <h2>전화 상담 기준</h2>
+          <p>상담에서는 먼저 상세 주소, 희망 시간, 방문 장소 유형을 확인합니다.</p>
+          <p>호텔, 오피스텔, 주거지, 사무실은 출입 방식이 다르고 주차나 대기 공간에 따라 실제 방문 흐름이 달라질 수 있습니다.</p>
+          <p>피로 부위나 컨디션도 함께 확인하지만 의료 진단이나 치료를 대신하지 않습니다. 통증이나 질환이 있으면 전문 의료 상담이 먼저입니다.</p>
+        </article>
+        <article class="content-panel">
+          <h2>예약 전 체크리스트</h2>
+          <p>아래 항목을 준비하면 상담 시간이 짧아지고 안내가 더 정확해집니다.</p>
+          <ul>
+            <li>${district.name} 내 상세 주소와 가까운 출입구를 확인합니다.</li>
+            <li>희망 시간과 조정 가능한 시간 범위를 함께 정리합니다.</li>
+            <li>건물 출입, 주차, 로비 대기 가능 여부를 확인합니다.</li>
+            <li>알레르기나 건강상 주의사항은 숨기지 않습니다.</li>
+            <li>마사지가 의료 진단이나 치료를 대신하지 않는다는 점을 이해합니다.</li>
+          </ul>
+        </article>
+        <article class="content-panel">
+          <h2>콘텐츠 원칙</h2>
+          <p>이 문서는 마사지KING 운영팀이 예약 상담에서 반복적으로 확인하는 질문을 바탕으로 작성했습니다.</p>
+          <p>문장 정리에 AI 도움을 받을 수 있지만 최종 문구는 운영 기준과 서비스 한계 고지에 맞춰 검수합니다. 지역명만 바꾼 복제 문서가 되지 않도록 ${district.name}의 생활권과 상담 변수를 반영했습니다.</p>
+          <p>허위 후기, 치료 효과 단정, 순위 조작 목적의 키워드 반복, 보장성 표현은 사용하지 않습니다.</p>
+        </article>
+      </section>
+
+      <section class="who-how-why">
+        <div><h2>Who</h2><p>마사지KING 운영팀이 작성하고 관리합니다. 실제 예약 문의에서 반복되는 질문과 현장 고지 기준을 바탕으로 정리했습니다.</p></div>
+        <div><h2>How</h2><p>문장 정리는 AI의 도움을 받을 수 있지만 최종 문구는 운영 기준, 안전 고지, 서비스 한계에 맞춰 확인합니다.</p></div>
+        <div><h2>Why</h2><p>목적은 검색 순위 조작이 아니라 예약자가 전화 전에 필요한 정보를 이해하도록 돕는 것입니다.</p></div>
+      </section>
+
+      <section class="page-cta">
+        <div><p class="eyebrow">Reservation</p><h2>${district.name} 가능 여부는 전화 상담에서 확인하세요</h2><p>주소, 시간, 방문 환경을 알려주시면 현재 기준으로 안내합니다.</p></div>
+        <a class="primary-button" href="tel:05082024743">0508-202-4743</a>
+      </section>
+    </main>
+
+    ${footer}
+  </body>
+</html>
+`;
+}
+
+let incheonHtml = sourceHtml;
+incheonHtml = incheonHtml.replace(/\s*<section class="district-directory" aria-label="인천 군구별 출장마사지 안내">[\s\S]*?<\/section>\s*/, "\n\n");
+incheonHtml = incheonHtml.replace(/\s*<section class="area-commerce"/, `\n\n${directoryHtml()}      <section class="area-commerce"`);
+await fs.writeFile(incheonPath, incheonHtml, "utf8");
+
+for (const district of districts) {
+  const dir = path.join(root, "areas", "incheon", district.slug);
+  await fs.mkdir(dir, { recursive: true });
+  await fs.writeFile(path.join(dir, "index.html"), districtPage(district), "utf8");
+}
+
+console.log(`Generated ${districts.length} Incheon district pages.`);
