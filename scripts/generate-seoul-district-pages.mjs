@@ -157,15 +157,15 @@ function districtPage(d) {
   const title = seoMeta[d.slug]?.title ?? `${d.name} 출장마사지 상담 기준 | 마사지KING`;
   const description = seoMeta[d.slug]?.description ?? d.intro;
   const areaCards = d.areas.map((area) => `<article class="area-zone-card"><span>${d.name}</span><h3>${area}</h3><p>${area} 권역은 같은 구 안에서도 건물 유형과 시간대에 따라 안내가 달라질 수 있습니다.</p><strong>주소 기준 확인</strong></article>`).join("\n          ");
-  const reviewCards = d.areas.map((area, index) => {
-    const labels = ["주소 확인", "시간대 조정", "출입 조건"];
-    const texts = [
-      `${area} 인근 문의에서 역명보다 상세 주소를 먼저 확인하니 가능 시간 안내가 더 분명했습니다. 상담에서 확정 가능한 내용과 현장 확인이 필요한 내용을 구분해 들었습니다.`,
-      `${area} 생활권은 이동 시간이 짧아 보여도 예약 시간대에 따라 달라질 수 있다는 설명을 받았습니다. 희망 시간을 조금 넓게 잡으니 상담이 빨리 정리됐습니다.`,
-      `${area} 방문은 건물 출입 방식과 주차 가능 여부를 미리 확인해야 했습니다. 준비할 정보를 먼저 알려줘 불필요한 재통화를 줄일 수 있었습니다.`,
-    ];
-    return `<article class="local-review-card"><header><strong>${area}</strong><span>${labels[index]}</span></header><p>${texts[index]}</p><footer>익명 이용 메모 · 2026</footer></article>`;
-  }).join("\n          ");
+  const reviewItems = [
+    { area: d.areas[0], label: "주소 확인", text: `${d.areas[0]} 인근 문의에서 역명보다 상세 주소를 먼저 확인하니 가능 시간 안내가 더 분명했습니다. 상담에서 확정 가능한 내용과 현장 확인이 필요한 내용을 구분해 들었습니다.` },
+    { area: d.areas[1], label: "시간대 조정", text: `${d.areas[1]} 생활권은 이동 시간이 짧아 보여도 예약 시간대에 따라 달라질 수 있다는 설명을 받았습니다. 희망 시간을 조금 넓게 잡으니 상담이 빨리 정리됐습니다.` },
+    { area: d.areas[2], label: "출입 조건", text: `${d.areas[2]} 방문은 건물 출입 방식과 주차 가능 여부를 미리 확인해야 했습니다. 준비할 정보를 먼저 알려줘 불필요한 재통화를 줄일 수 있었습니다.` },
+    { area: d.board, label: "가격 확인", text: `${d.name} 기준 요금표를 먼저 보고 전화했지만, 실제 안내는 시간대와 방문 환경을 확인한 뒤 설명받았습니다. 추가 확인이 필요한 부분을 숨기지 않아 판단하기 쉬웠습니다.` },
+    { area: d.points[0], label: "컨디션 상담", text: `피로 부위와 피해야 할 부위를 먼저 물어봤습니다. 강한 압을 무조건 권하지 않고 불편하면 조절할 수 있다고 안내해 부담이 줄었습니다.` },
+    { area: d.points[2], label: "예약 전 준비", text: `방문 전에 주소, 출입 방식, 주차 가능 여부를 정리해 달라고 안내받았습니다. 통화 전에 준비할 항목이 분명해서 예약 흐름이 복잡하지 않았습니다.` },
+  ];
+  const reviewCards = reviewItems.map((item) => `<article class="local-review-card"><header><strong>${item.area}</strong><span>${item.label}</span></header><p>${item.text}</p><footer>익명 이용 메모 · 2026</footer></article>`).join("\n          ");
 
   return `<!doctype html>
 <html lang="ko">
