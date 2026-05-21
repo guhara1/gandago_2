@@ -245,14 +245,28 @@ ${cards}
 `;
 }
 
+function allDistrictDirectoryHtml() {
+  const cards = groups.flatMap((group) => group.districts.map((district) => `          <a class="district-link-card" href="/areas/gyeonggi/${group.citySlug}/${district.slug}/"><strong>${district.name}</strong><span>${group.city} ${district.board} 기준 상담</span></a>`)).join("\n");
+  return `      <section class="district-directory all-district-directory" aria-label="경기도 전체 행정구 바로가기">
+        <div class="area-section-head">
+          <div><p class="eyebrow">Gyeonggi districts</p><h2>경기도 전체 행정구 바로가기</h2></div>
+          <p>수원, 성남, 안양, 부천, 안산, 고양, 용인처럼 구 단위 확인이 필요한 지역은 여기에서 바로 이동할 수 있습니다. 시군 페이지를 한 번 더 거치지 않고 원하는 행정구의 상담 기준과 이동 조건을 먼저 확인하도록 정리했습니다.</p>
+        </div>
+        <div class="district-directory-grid">
+${cards}
+        </div>
+      </section>
+
+`;
+}
+
 for (const group of groups) {
   const cityDir = path.join(root, "areas", "gyeonggi", group.citySlug);
   const cityPath = path.join(cityDir, "index.html");
   let cityHtml = await fs.readFile(cityPath, "utf8");
   const existingDirectory = new RegExp(`\\s*<section class="district-directory(?: city-district-directory)?" aria-label="${group.city} 행정구별 출장마사지 안내">[\\s\\S]*?<\\/section>\\s*`);
   cityHtml = cityHtml.replace(existingDirectory, "\n\n");
-  const marker = `      <section class="area-dashboard"`;
-  cityHtml = cityHtml.replace(marker, `${directoryHtml(group)}      <section class="area-dashboard"`);
+  cityHtml = cityHtml.replace(/\s*<section class="area-dashboard"/, `\n\n${directoryHtml(group)}      <section class="area-dashboard"`);
   await fs.writeFile(cityPath, cityHtml, "utf8");
 
   for (const district of group.districts) {
@@ -261,5 +275,10 @@ for (const group of groups) {
     await fs.writeFile(path.join(dir, "index.html"), pageFor(group, district), "utf8");
   }
 }
+
+let gyeonggiHtml = await fs.readFile(gyeonggiPath, "utf8");
+gyeonggiHtml = gyeonggiHtml.replace(/\s*<section class="district-directory all-district-directory"[\s\S]*?<\/section>\s*/, "\n\n");
+gyeonggiHtml = gyeonggiHtml.replace(/\s*<section class="area-commerce"/, `\n\n${allDistrictDirectoryHtml()}      <section class="area-commerce"`);
+await fs.writeFile(gyeonggiPath, gyeonggiHtml, "utf8");
 
 console.log(`Generated ${groups.reduce((sum, group) => sum + group.districts.length, 0)} Gyeonggi district pages.`);
