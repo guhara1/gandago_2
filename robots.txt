@@ -1,4 +1,20 @@
+﻿User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Googlebot-Mobile
+Allow: /
+
+User-agent: NaverBot
+Allow: /
+
+User-agent: Yeti
+Allow: /
+
 User-agent: *
 Allow: /
 
 Sitemap: https://massageking.club/sitemap.xml
+Sitemap: https://massageking.club/rss.xml

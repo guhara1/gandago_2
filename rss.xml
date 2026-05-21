@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>마사지KING 업데이트</title>
+    <link>https://massageking.club/</link>
+    <atom:link href="https://massageking.club/rss.xml" rel="self" type="application/rss+xml" />
+    <description>마사지KING의 주요 지역, 서비스, 가격, 안전 기준, 매거진 콘텐츠 업데이트 피드입니다.</description>
+    <language>ko-KR</language>
+    <lastBuildDate>Fri, 22 May 2026 00:00:00 +0900</lastBuildDate>
+    <ttl>60</ttl>
+    <item>
+      <title>마사지KING | 서울 경기 인천 출장마사지 예약</title>
+      <link>https://massageking.club/</link>
+      <guid isPermaLink="true">https://massageking.club/</guid>
+      <description>서울, 경기, 인천, 부산 지역 출장마사지 예약 안내와 가격, 안전 기준, 가능 지역 정보를 확인할 수 있습니다.</description>
+      <category>홈</category>
+      <pubDate>Fri, 22 May 2026 00:00:00 +0900</pubDate>
+    </item>    <item>
+      <title>마사지KING 지역별 출장마사지 가능 지역 안내</title>
+      <link>https://massageking.club/areas/</link>
+      <guid isPermaLink="true">https://massageking.club/areas/</guid>
+      <description>서울, 경기, 인천, 부산 지역별 가능 지역과 상담 전 확인해야 할 기준을 정리했습니다.</description>
+      <category>지역</category>
+      <pubDate>Fri, 22 May 2026 00:00:00 +0900</pubDate>
+    </item>    <item>
+      <title>서울 출장마사지 가능 지역 안내</title>
+      <link>https://massageking.club/areas/seoul/</link>
+      <guid isPermaLink="true">https://massageking.club/areas/seoul/</guid>
+      <description>서울 권역별 출장마사지 예약 전 확인해야 할 이동 시간, 주소, 방문 환경 기준을 안내합니다.</description>
+      <category>서울</category>
+      <pubDate>Fri, 22 May 2026 00:00:00 +0900</pubDate>
+    </item>    <item>
+      <title>경기도 출장마사지 가능 지역 안내</title>
+      <link>https://massageking.club/areas/gyeonggi/</link>
+      <guid isPermaLink="true">https://massageking.club/areas/gyeonggi/</guid>
+      <description>경기도 행정시와 행정구 기준으로 출장마사지 가능 여부 확인에 필요한 정보를 정리했습니다.</description>
+      <category>경기</category>
+      <pubDate>Fri, 22 May 2026 00:00:00 +0900</pubDate>
+    </item>    <item>
+      <title>인천 출장마사지 가능 지역 안내</title>
+      <link>https://massageking.club/areas/incheon/</link>
+      <guid isPermaLink="true">https://massageking.club/areas/incheon/</guid>
+      <description>인천 행정구와 생활권 기준으로 예약 상담 전 확인할 정보를 안내합니다.</description>
+      <category>인천</category>
+      <pubDate>Fri, 22 May 2026 00:00:00 +0900</pubDate>
+    </item>    <item>
+      <title>부산 출장마사지 가능 지역 안내</title>
+      <link>https://massageking.club/areas/busan/</link>
+      <guid isPermaLink="true">https://massageking.club/areas/busan/</guid>
+      <description>부산 행정구 기준 출장마사지 가능 지역과 상담 전 체크 포인트를 확인할 수 있습니다.</description>
+      <category>부산</category>
+      <pubDate>Fri, 22 May 2026 00:00:00 +0900</pubDate>
+    </item>    <item>
+      <title>마사지KING 마사지 가격표 안내</title>
+      <link>https://massageking.club/guide/price/</link>
+      <guid isPermaLink="true">https://massageking.club/guide/price/</guid>
+      <description>서비스별 마사지 가격과 예약 전 확인해야 할 요금 기준을 투명하게 정리했습니다.</description>
+      <category>가격</category>
+      <pubDate>Fri, 22 May 2026 00:00:00 +0900</pubDate>
+    </item>    <item>
+      <title>마사지KING 서비스 안내</title>
+      <link>https://massageking.club/service/</link>
+      <guid isPermaLink="true">https://massageking.club/service/</guid>
+      <description>출장마사지, 홈타이, 스웨디시, 아로마, 건식 관리 등 서비스 범위와 한계를 안내합니다.</description>
+      <category>서비스</category>
+      <pubDate>Fri, 22 May 2026 00:00:00 +0900</pubDate>
+    </item>    <item>
+      <title>출장마사지 예약 방법 안내</title>
+      <link>https://massageking.club/guide/reservation/</link>
+      <guid isPermaLink="true">https://massageking.club/guide/reservation/</guid>
+      <description>전화 상담부터 방문 전 확인 사항까지 예약 절차를 쉽게 이해할 수 있도록 정리했습니다.</description>
+      <category>예약</category>
+      <pubDate>Fri, 22 May 2026 00:00:00 +0900</pubDate>
+    </item>    <item>
+      <title>출장마사지 안전 기준 안내</title>
+      <link>https://massageking.club/guide/safety/</link>
+      <guid isPermaLink="true">https://massageking.club/guide/safety/</guid>
+      <description>이용자와 방문자 모두를 위한 안전 고지, 서비스 한계, 상담 기준을 안내합니다.</description>
+      <category>안전</category>
+      <pubDate>Fri, 22 May 2026 00:00:00 +0900</pubDate>
+    </item>    <item>
+      <title>마사지KING 이용 후기 모음</title>
+      <link>https://massageking.club/reviews/</link>
+      <guid isPermaLink="true">https://massageking.club/reviews/</guid>
+      <description>지역별 이용자가 예약 전 참고할 수 있는 후기형 콘텐츠를 정리했습니다.</description>
+      <category>후기</category>
+      <pubDate>Fri, 22 May 2026 00:00:00 +0900</pubDate>
+    </item>    <item>
+      <title>마사지KING 매거진</title>
+      <link>https://massageking.club/magazine/</link>
+      <guid isPermaLink="true">https://massageking.club/magazine/</guid>
+      <description>출장마사지 예약 전 알아두면 좋은 컨디션 관리, 지역 생활권, 피로 관리 정보를 제공합니다.</description>
+      <category>매거진</category>
+      <pubDate>Fri, 22 May 2026 00:00:00 +0900</pubDate>
+    </item>    <item>
+      <title>마사지KING 콘텐츠 작성 기준</title>
+      <link>https://massageking.club/policy/editorial/</link>
+      <guid isPermaLink="true">https://massageking.club/policy/editorial/</guid>
+      <description>마사지KING 콘텐츠의 Who, How, Why 원칙과 정정 요청 기준을 공개합니다.</description>
+      <category>정책</category>
+      <pubDate>Fri, 22 May 2026 00:00:00 +0900</pubDate>
+    </item>    <item>
+      <title>마사지KING 고객센터</title>
+      <link>https://massageking.club/contact/</link>
+      <guid isPermaLink="true">https://massageking.club/contact/</guid>
+      <description>예약 상담, 정정 요청, 운영자 연락처와 문의 경로를 안내합니다.</description>
+      <category>문의</category>
+      <pubDate>Fri, 22 May 2026 00:00:00 +0900</pubDate>
+    </item>  </channel>
+</rss>
