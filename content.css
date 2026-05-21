@@ -514,57 +514,68 @@
 
 .area-page .content-long {
   position: relative;
-  width: min(1080px, 100%);
+  display: grid;
+  width: min(1160px, 100%);
   margin-inline: auto;
+  gap: 18px;
   counter-reset: area-section;
 }
 
 .area-page .content-panel {
   counter-increment: area-section;
+  position: relative;
   display: grid;
-  grid-template-columns: minmax(150px, 0.28fr) minmax(0, 1fr);
-  gap: clamp(24px, 5vw, 72px);
-  padding: clamp(38px, 6vw, 72px) 0;
-  border: 0;
-  border-bottom: 1px solid rgba(17, 26, 23, 0.12);
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-  overflow: visible;
-}
-
-.area-page .content-panel:first-child {
-  border-top: 1px solid rgba(17, 26, 23, 0.12);
+  grid-template-columns: minmax(230px, 300px) minmax(0, 1fr);
+  column-gap: clamp(24px, 4vw, 42px);
+  row-gap: 16px;
+  padding: clamp(22px, 3vw, 34px);
+  overflow: hidden;
+  border: 1px solid rgba(17, 26, 23, 0.1);
+  border-radius: 8px;
+  background:
+    linear-gradient(90deg, rgba(8, 57, 45, 0.98) 0 300px, transparent 300px),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 251, 247, 0.94));
+  box-shadow: 0 18px 44px rgba(17, 26, 23, 0.08);
 }
 
 .area-page .content-panel::before {
-  display: none;
+  position: absolute;
+  inset: 0 auto 0 0;
+  display: block;
+  width: 5px;
+  background: linear-gradient(180deg, var(--gold), var(--green));
+  content: "";
 }
 
 .area-page .content-panel h2 {
   position: relative;
-  display: grid;
-  gap: 14px;
-  align-content: start;
-  max-width: none;
-  color: var(--ink);
-  font-size: clamp(22px, 2.4vw, 30px);
+  grid-column: 1;
+  grid-row: 1 / 10;
+  align-self: start;
+  margin: 0;
+  padding: 46px 6px 24px 18px;
+  color: var(--white);
+  font-size: clamp(24px, 2.4vw, 34px);
+  line-height: 1.18;
 }
 
 .area-page .content-panel h2::before {
-  content: "0" counter(area-section);
-  width: max-content;
-  padding: 8px 10px;
-  border-radius: 999px;
-  color: var(--green-dark);
-  background: rgba(15, 95, 68, 0.08);
-  font-size: 13px;
+  position: absolute;
+  top: 0;
+  left: 18px;
+  content: "Brief " counter(area-section, decimal-leading-zero);
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 12px;
   font-weight: 950;
-  letter-spacing: 0;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .area-page .content-panel h2::after {
-  width: 42px;
+  position: absolute;
+  left: 18px;
+  bottom: 0;
+  width: 54px;
   height: 2px;
   background: var(--gold);
   content: "";
@@ -572,29 +583,47 @@
 
 .area-page .content-panel p,
 .area-page .content-panel ul {
+  grid-column: 2;
   max-width: 760px;
 }
 
 .area-page .content-panel p {
-  color: #20302a;
+  margin: 0;
+  color: #1b2b25;
+  font-size: 17px;
+  line-height: 1.86;
+}
+
+.area-page .content-panel p:first-of-type {
+  max-width: 680px;
+  padding: 16px 18px;
+  border-left: 3px solid var(--gold);
+  color: var(--ink);
+  background: rgba(184, 135, 66, 0.08);
   font-size: 18px;
-  line-height: 2;
+  font-weight: 850;
+  line-height: 1.72;
 }
 
 .area-page .content-panel p + p {
-  margin-top: 22px;
+  margin-top: 0;
 }
 
 .area-page .content-panel ul {
-  padding: 24px 26px 24px 46px;
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding: 18px 20px 18px 40px;
   border: 1px solid rgba(17, 26, 23, 0.09);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.74);
-  box-shadow: var(--shadow-sm);
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: none;
 }
 
 .area-page .content-panel li {
   padding-left: 4px;
+  color: #1f312b;
+  line-height: 1.72;
 }
 
 .who-how-why {
@@ -696,6 +725,32 @@
 
   .area-page .content-panel {
     gap: 20px;
+    padding: 0;
+    background: linear-gradient(180deg, rgba(8, 57, 45, 0.98) 0 156px, rgba(255, 255, 255, 0.98) 156px);
+  }
+
+  .area-page .content-panel h2 {
+    grid-row: auto;
+    padding: 48px 24px 30px;
+  }
+
+  .area-page .content-panel h2::before {
+    left: 24px;
+  }
+
+  .area-page .content-panel h2::after {
+    left: 24px;
+  }
+
+  .area-page .content-panel p,
+  .area-page .content-panel ul {
+    width: calc(100% - 40px);
+    margin-inline: auto;
+  }
+
+  .area-page .content-panel p:last-child,
+  .area-page .content-panel ul:last-child {
+    margin-bottom: 24px;
   }
 
   .page-cta {
@@ -718,5 +773,14 @@
   .who-how-why div,
   .page-cta {
     padding: 23px;
+  }
+
+  .area-page .content-panel {
+    padding: 0;
+  }
+
+  .area-page .content-panel p,
+  .area-page .content-panel ul {
+    width: calc(100% - 32px);
   }
 }
