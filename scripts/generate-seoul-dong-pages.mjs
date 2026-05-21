@@ -64,7 +64,7 @@ function priceCardsHtml() {
 
 function dongDirectoryHtml(group) {
   const cards = sortByKoreanName(group.dongs)
-    .map((dong) => `          <a class="district-link-card" href="/areas/seoul/${group.slug}/${slugFor(dong)}/"><strong>${dong}</strong><span>${group.gu} ${dong} 주소 기준 상담</span></a>`)
+    .map((dong) => `          <a class="district-link-card" href="/areas/seoul/${group.slug}/${slugFor(dong)}/"><strong>${dong}</strong></a>`)
     .join("\n");
   return `      <section class="district-directory dong-directory" aria-label="${group.gu} 행정동별 출장마사지 안내">
         <div class="area-section-head">
