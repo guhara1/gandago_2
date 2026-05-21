@@ -609,6 +609,60 @@
   padding: 22px;
 }
 
+.district-directory {
+  display: grid;
+  gap: 22px;
+  padding: clamp(42px, 6vw, 68px) 0 0;
+}
+
+.district-directory-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.district-link-card {
+  position: relative;
+  min-height: 118px;
+  padding: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(17, 26, 23, 0.09);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 251, 247, 0.94)),
+    var(--white);
+  box-shadow: 0 14px 30px rgba(17, 26, 23, 0.06);
+}
+
+.district-link-card::before {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: linear-gradient(90deg, var(--green), var(--gold));
+  content: "";
+}
+
+.district-link-card strong {
+  display: block;
+  color: var(--ink);
+  font-size: 19px;
+  font-weight: 950;
+}
+
+.district-link-card span {
+  display: block;
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.district-link-card:hover {
+  border-color: rgba(15, 95, 68, 0.32);
+  box-shadow: 0 20px 44px rgba(17, 26, 23, 0.1);
+  transform: translateY(-2px);
+}
+
 .area-commerce {
   display: grid;
   gap: 22px;
@@ -960,6 +1014,7 @@
   .area-zone-grid,
   .area-signal-panel,
   .area-section-head,
+  .district-directory-grid,
   .local-price-grid,
   .local-review-grid,
   .who-how-why {
