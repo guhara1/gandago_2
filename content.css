@@ -85,6 +85,118 @@
   padding: clamp(54px, 7vw, 76px) 0;
 }
 
+.area-dashboard {
+  padding: clamp(46px, 6vw, 70px) 0 0;
+}
+
+.area-dashboard-head {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(260px, 0.42fr);
+  gap: clamp(22px, 5vw, 56px);
+  align-items: end;
+  margin-bottom: 26px;
+}
+
+.area-dashboard-head h2 {
+  margin: 0;
+  font-size: clamp(28px, 4.2vw, 48px);
+  line-height: 1.18;
+}
+
+.area-dashboard-head p:not(.eyebrow) {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 18px;
+}
+
+.area-zone-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.area-zone-card {
+  position: relative;
+  display: grid;
+  min-height: 280px;
+  padding: 28px;
+  overflow: hidden;
+  border: 1px solid rgba(17, 26, 23, 0.08);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(248, 251, 247, 0.92)),
+    var(--white);
+  box-shadow: var(--shadow-sm);
+}
+
+.area-zone-card::before {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: linear-gradient(90deg, var(--green), var(--gold));
+  content: "";
+}
+
+.area-zone-card span {
+  width: max-content;
+  padding: 7px 10px;
+  border-radius: 999px;
+  color: var(--green-dark);
+  background: rgba(15, 95, 68, 0.08);
+  font-size: 12px;
+  font-weight: 950;
+}
+
+.area-zone-card h3 {
+  margin-top: 28px;
+  font-size: 25px;
+}
+
+.area-zone-card p {
+  margin: 0;
+}
+
+.area-zone-card strong {
+  align-self: end;
+  margin-top: 24px;
+  color: var(--green);
+  font-weight: 950;
+}
+
+.area-zone-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.area-signal-panel {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 18px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--line);
+  box-shadow: var(--shadow-sm);
+}
+
+.area-signal-panel div {
+  display: grid;
+  gap: 6px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.area-signal-panel b {
+  color: var(--green-dark);
+}
+
+.area-signal-panel span {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
 .price-detail {
   padding: clamp(54px, 7vw, 76px) 0 0;
 }
@@ -256,6 +368,9 @@
   .page-meta,
   .price-grid.detailed,
   .content-grid,
+  .area-dashboard-head,
+  .area-zone-grid,
+  .area-signal-panel,
   .who-how-why {
     grid-template-columns: 1fr;
   }
