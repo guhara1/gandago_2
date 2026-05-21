@@ -77,6 +77,8 @@ function cityPage(city) {
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="naver-site-verification" content="1094b09299c1d789613f59f7dc82ec6cc6dbf35e">
+    <meta name="google-site-verification" content="sc7seybQ6mKH_1eX-rOQ2gMJ3jfx3TlN2PkQOq_nSvI">
     <title>${title}</title>
     <meta name="description" content="${description}">
     <meta name="robots" content="noindex,follow,max-image-preview:large">
