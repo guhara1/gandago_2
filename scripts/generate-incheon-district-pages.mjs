@@ -29,12 +29,12 @@ const districts = [
 
 const priceCards = `
         <div class="local-price-grid">
-          <article class="local-price-card"><h3>타이마사지 건식</h3><p>스트레칭과 압 조절 중심의 기본 건식 관리입니다.</p><dl><div><dt>60분</dt><dd>70,000원</dd></div><div><dt>90분</dt><dd>90,000원</dd></div><div><dt>120분</dt><dd>110,000원</dd></div></dl></article>
-          <article class="local-price-card"><h3>아로마마사지 습식</h3><p>오일 사용 여부와 향 민감도를 먼저 확인합니다.</p><dl><div><dt>60분</dt><dd>80,000원</dd></div><div><dt>90분</dt><dd>100,000원</dd></div><div><dt>120분</dt><dd>120,000원</dd></div></dl></article>
-          <article class="local-price-card"><h3>감성케어 오일</h3><p>이완감 중심으로 강도와 진행 범위를 상담합니다.</p><dl><div><dt>60분</dt><dd>90,000원</dd></div><div><dt>90분</dt><dd>110,000원</dd></div><div><dt>120분</dt><dd>130,000원</dd></div></dl></article>
-          <article class="local-price-card"><h3>VVIP 전신케어</h3><p>건식과 오일 흐름을 길게 구성하는 전신 관리입니다.</p><dl><div><dt>60분</dt><dd>100,000원</dd></div><div><dt>90분</dt><dd>120,000원</dd></div><div><dt>120분</dt><dd>140,000원</dd></div><div><dt>150분</dt><dd>170,000원</dd></div></dl></article>
-          <article class="local-price-card"><h3>한국인 스웨디시</h3><p>소통 편의와 강도 조절을 원하는 예약 기준입니다.</p><dl><div><dt>60분</dt><dd>140,000원</dd></div><div><dt>90분</dt><dd>180,000원</dd></div></dl></article>
-          <article class="local-price-card"><h3>남성 스웨디시</h3><p>관리사 배정과 방문 조건을 전화로 먼저 확인합니다.</p><dl><div><dt>60분</dt><dd>90,000원</dd></div><div><dt>90분</dt><dd>120,000원</dd></div><div><dt>120분</dt><dd>150,000원</dd></div></dl></article>
+          <article class="local-price-card"><h3>타이마사지 건식</h3><p>스트레칭과 압 조절 중심의 기본 건식 관리입니다.</p><dl><div><dt>60분</dt><dd>80,000원</dd></div><div><dt>90분</dt><dd>100,000원</dd></div><div><dt>120분</dt><dd>120,000원</dd></div></dl></article>
+          <article class="local-price-card"><h3>아로마마사지 습식</h3><p>오일 사용 여부와 향 민감도를 먼저 확인합니다.</p><dl><div><dt>60분</dt><dd>90,000원</dd></div><div><dt>90분</dt><dd>110,000원</dd></div><div><dt>120분</dt><dd>130,000원</dd></div></dl></article>
+          <article class="local-price-card"><h3>감성케어 오일</h3><p>이완감 중심으로 강도와 진행 범위를 상담합니다.</p><dl><div><dt>60분</dt><dd>100,000원</dd></div><div><dt>90분</dt><dd>120,000원</dd></div><div><dt>120분</dt><dd>140,000원</dd></div></dl></article>
+          <article class="local-price-card"><h3>VVIP 전신케어</h3><p>건식과 오일 흐름을 길게 구성하는 전신 관리입니다.</p><dl><div><dt>60분</dt><dd>110,000원</dd></div><div><dt>90분</dt><dd>130,000원</dd></div><div><dt>120분</dt><dd>150,000원</dd></div><div><dt>150분</dt><dd>180,000원</dd></div></dl></article>
+          <article class="local-price-card"><h3>한국인 스웨디시</h3><p>소통 편의와 강도 조절을 원하는 예약 기준입니다.</p><dl><div><dt>60분</dt><dd>150,000원</dd></div><div><dt>90분</dt><dd>190,000원</dd></div></dl></article>
+          <article class="local-price-card"><h3>남성 스웨디시</h3><p>관리사 배정과 방문 조건을 전화로 먼저 확인합니다.</p><dl><div><dt>60분</dt><dd>100,000원</dd></div><div><dt>90분</dt><dd>130,000원</dd></div><div><dt>120분</dt><dd>160,000원</dd></div></dl></article>
         </div>`;
 
 function directoryHtml() {
