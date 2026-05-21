@@ -1,4 +1,4 @@
-import fs from "node:fs/promises";
+﻿import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -94,12 +94,12 @@ function dongPage(group, dong) {
     <meta name="description" content="${description}">
     <meta name="robots" content="noindex,follow,max-image-preview:large">
     <meta name="format-detection" content="telephone=no">
-    <link rel="canonical" href="https://gandago.xyz/">
+    <link rel="canonical" href="https://massageking.club/">
     <meta property="og:type" content="article">
     <meta property="og:locale" content="ko_KR">
     <meta property="og:title" content="${title}">
     <meta property="og:description" content="${description}">
-    <meta property="og:image" content="https://gandago-2.pages.dev/assets/hero-wellness.png">
+    <meta property="og:image" content="https://massageking.club/assets/hero-wellness.png">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="stylesheet" href="/styles.css">
     <link rel="stylesheet" href="/content.css">
