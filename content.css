@@ -425,10 +425,18 @@
   line-height: 1.16;
 }
 
+.area-hero-cta {
+  margin: 16px 0 0;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 16px;
+  font-weight: 750;
+  line-height: 1.68;
+}
+
 .area-hero-card ul {
   display: grid;
   gap: 12px;
-  margin: 24px 0;
+  margin: 22px 0;
   padding: 0;
   list-style: none;
 }
@@ -453,11 +461,22 @@
 .area-hero-card a {
   align-self: end;
   justify-self: start;
-  padding: 12px 15px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 50px;
+  padding: 13px 18px;
   border-radius: 999px;
   color: var(--green-dark);
   background: var(--white);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.18);
   font-weight: 950;
+}
+
+.area-hero-card a::before {
+  content: "☎";
+  color: var(--gold);
+  font-size: 17px;
 }
 
 .area-page .area-dashboard {
