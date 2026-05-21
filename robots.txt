@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://gandago-2.pages.dev/sitemap.xml
+Sitemap: https://gandago.xyz/sitemap.xml
