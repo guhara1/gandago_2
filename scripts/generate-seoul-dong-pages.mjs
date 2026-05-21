@@ -15,7 +15,7 @@ if (!header || !footer) {
 
 const koCollator = new Intl.Collator("ko-KR");
 const sortByKoreanName = (items) => [...items].sort((a, b) => koCollator.compare(a.name, b.name));
-const slugFor = (name) => encodeURIComponent(name);
+const slugFor = (name) => name;
 
 const groups = [
   { gu: "강남구", slug: "gangnam", dongs: ["개포동", "논현동", "대치동", "도곡동", "삼성동", "세곡동", "수서동", "신사동", "압구정동", "역삼동", "일원동", "청담동"] },
