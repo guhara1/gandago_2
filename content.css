@@ -609,6 +609,181 @@
   padding: 22px;
 }
 
+.area-commerce {
+  display: grid;
+  gap: 22px;
+  padding: clamp(42px, 6vw, 70px) 0 0;
+}
+
+.area-section-head {
+  display: grid;
+  grid-template-columns: minmax(0, 0.72fr) minmax(260px, 0.4fr);
+  gap: clamp(22px, 5vw, 56px);
+  align-items: end;
+}
+
+.area-section-head h2 {
+  margin: 0;
+  font-size: clamp(30px, 4.2vw, 48px);
+  line-height: 1.14;
+}
+
+.area-section-head p:not(.eyebrow) {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 17px;
+}
+
+.local-price-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.local-price-card {
+  position: relative;
+  min-height: 250px;
+  padding: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(17, 26, 23, 0.09);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 251, 247, 0.94)),
+    var(--white);
+  box-shadow: 0 16px 38px rgba(17, 26, 23, 0.07);
+}
+
+.local-price-card::before {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: linear-gradient(90deg, var(--green), var(--gold));
+  content: "";
+}
+
+.local-price-card h3 {
+  margin: 0 0 8px;
+  font-size: 21px;
+}
+
+.local-price-card p {
+  min-height: 56px;
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.62;
+}
+
+.local-price-card dl {
+  display: grid;
+  gap: 0;
+  margin: 0;
+}
+
+.local-price-card div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 0;
+  border-top: 1px solid rgba(17, 26, 23, 0.09);
+}
+
+.local-price-card dt {
+  color: var(--ink-soft);
+}
+
+.local-price-card dd {
+  margin: 0;
+  color: var(--green-dark);
+  font-weight: 950;
+}
+
+.area-price-note,
+.area-review-note {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 18px 20px;
+  border: 1px solid rgba(17, 26, 23, 0.08);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: var(--shadow-sm);
+}
+
+.area-price-note p,
+.area-review-note p {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+.area-price-note a {
+  min-width: max-content;
+  color: var(--green);
+  font-weight: 950;
+}
+
+.area-reviews {
+  display: grid;
+  gap: 22px;
+  padding: clamp(44px, 6vw, 74px) 0 0;
+}
+
+.local-review-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.local-review-card {
+  display: grid;
+  gap: 16px;
+  min-height: 230px;
+  padding: 24px;
+  border: 1px solid rgba(17, 26, 23, 0.09);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(250, 249, 244, 0.92)),
+    var(--white);
+  box-shadow: 0 16px 38px rgba(17, 26, 23, 0.07);
+}
+
+.local-review-card header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.local-review-card strong {
+  color: var(--ink);
+  font-size: 17px;
+  font-weight: 950;
+}
+
+.local-review-card span {
+  color: var(--gold);
+  font-size: 13px;
+  font-weight: 950;
+}
+
+.local-review-card p {
+  margin: 0;
+  color: #1f312b;
+  font-size: 16px;
+  line-height: 1.74;
+}
+
+.local-review-card footer {
+  width: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 850;
+}
+
 .area-page .content-long {
   position: relative;
   display: grid;
@@ -784,6 +959,9 @@
   .area-dashboard-head,
   .area-zone-grid,
   .area-signal-panel,
+  .area-section-head,
+  .local-price-grid,
+  .local-review-grid,
   .who-how-why {
     grid-template-columns: 1fr;
   }
@@ -869,6 +1047,12 @@
   }
 
   .page-cta {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .area-price-note,
+  .area-review-note {
     align-items: flex-start;
     flex-direction: column;
   }
