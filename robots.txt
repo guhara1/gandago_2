@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://gandago.xyz/sitemap.xml
+Sitemap: https://massageking.club/sitemap.xml
