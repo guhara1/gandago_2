@@ -58,6 +58,7 @@ $menu = @"
             <a href="/reviews/seoul/">서울 이용 기준</a>
             <a href="/reviews/gyeonggi/">경기 이용 기준</a>
             <a href="/reviews/incheon/">인천 이용 기준</a>
+            <a href="/reviews/busan/">부산 이용 기준</a>
             <a href="/reviews/first-time/">첫 이용 체크</a>
           </div>
         </div>
