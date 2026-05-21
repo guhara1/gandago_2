@@ -615,6 +615,21 @@
   padding: clamp(42px, 6vw, 68px) 0 0;
 }
 
+.city-district-directory {
+  margin-top: 28px;
+  padding: clamp(24px, 3.4vw, 36px);
+  border: 1px solid rgba(17, 26, 23, 0.1);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(15, 95, 68, 0.08), transparent 42%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 251, 247, 0.96));
+  box-shadow: 0 18px 44px rgba(17, 26, 23, 0.08);
+}
+
+.city-district-directory .district-directory-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
 .district-directory-grid {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));

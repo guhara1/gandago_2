@@ -6,7 +6,8 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const seoulPath = path.join(root, "areas", "seoul", "index.html");
 const seoulHtml = await fs.readFile(seoulPath, "utf8");
 const header = seoulHtml.match(/<header class="site-header"[\s\S]*?<\/header>/)?.[0];
-const footer = seoulHtml.match(/<footer>[\s\S]*?<\/footer>/)?.[0];
+const footers = seoulHtml.match(/<footer>[\s\S]*?<\/footer>/g) ?? [];
+const footer = footers.at(-1);
 
 if (!header || !footer) {
   throw new Error("Could not find shared header or footer in Seoul page.");

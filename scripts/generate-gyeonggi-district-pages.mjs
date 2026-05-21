@@ -6,7 +6,8 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const gyeonggiPath = path.join(root, "areas", "gyeonggi", "index.html");
 const sourceHtml = await fs.readFile(gyeonggiPath, "utf8");
 const header = sourceHtml.match(/<header class="site-header"[\s\S]*?<\/header>/)?.[0];
-const footer = sourceHtml.match(/<footer>[\s\S]*?<\/footer>/)?.[0];
+const footers = sourceHtml.match(/<footer>[\s\S]*?<\/footer>/g) ?? [];
+const footer = footers.at(-1);
 
 if (!header || !footer) throw new Error("Could not find shared header or footer.");
 
@@ -231,10 +232,10 @@ ${priceCards}
 
 function directoryHtml(group) {
   const cards = group.districts.map((district) => `          <a class="district-link-card" href="/areas/gyeonggi/${group.citySlug}/${district.slug}/"><strong>${district.name}</strong><span>${district.board} 생활권 기준 확인</span></a>`).join("\n");
-  return `      <section class="district-directory" aria-label="${group.city} 행정구별 출장마사지 안내">
+  return `      <section class="district-directory city-district-directory" aria-label="${group.city} 행정구별 출장마사지 안내">
         <div class="area-section-head">
-          <div><p class="eyebrow">${group.cityLabel}</p><h2>${group.city} 행정구별 가능 지역 안내</h2></div>
-          <p>구 이름을 단순 반복하지 않고, 각 행정구별 이동 거리와 방문 조건을 확인할 수 있도록 개별 안내 페이지로 연결합니다.</p>
+          <div><p class="eyebrow">District shortcut</p><h2>${group.city} 행정구 바로가기</h2></div>
+          <p>${group.cityLabel}를 먼저 선택하면 구별 이동 거리, 출입 방식, 주차 조건을 더 정확하게 확인할 수 있습니다.</p>
         </div>
         <div class="district-directory-grid">
 ${cards}
@@ -248,11 +249,11 @@ for (const group of groups) {
   const cityDir = path.join(root, "areas", "gyeonggi", group.citySlug);
   const cityPath = path.join(cityDir, "index.html");
   let cityHtml = await fs.readFile(cityPath, "utf8");
-  const marker = `<section class="area-commerce"`;
-  if (!cityHtml.includes(`aria-label="${group.city} 행정구별 출장마사지 안내"`)) {
-    cityHtml = cityHtml.replace(marker, `${directoryHtml(group)}      ${marker}`);
-    await fs.writeFile(cityPath, cityHtml, "utf8");
-  }
+  const existingDirectory = new RegExp(`\\s*<section class="district-directory(?: city-district-directory)?" aria-label="${group.city} 행정구별 출장마사지 안내">[\\s\\S]*?<\\/section>\\s*`);
+  cityHtml = cityHtml.replace(existingDirectory, "\n\n");
+  const marker = `      <section class="area-dashboard"`;
+  cityHtml = cityHtml.replace(marker, `${directoryHtml(group)}      <section class="area-dashboard"`);
+  await fs.writeFile(cityPath, cityHtml, "utf8");
 
   for (const district of group.districts) {
     const dir = path.join(cityDir, district.slug);
