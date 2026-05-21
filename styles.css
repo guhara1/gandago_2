@@ -659,6 +659,66 @@ details[open] {
   box-shadow: var(--shadow-md);
 }
 
+.who-how-why {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  width: min(100%, 1160px);
+  margin: 0 auto clamp(52px, 7vw, 88px);
+  padding: 0;
+}
+
+.who-how-why div {
+  position: relative;
+  overflow: hidden;
+  min-height: 230px;
+  padding: clamp(24px, 3vw, 34px);
+  border: 1px solid rgba(17, 26, 23, 0.1);
+  border-top: 4px solid var(--green);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(248, 251, 247, 0.9)),
+    var(--panel);
+  box-shadow: var(--shadow-sm);
+}
+
+.who-how-why div::before {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 18px;
+  border-radius: 999px;
+  color: var(--green-dark);
+  background: rgba(15, 95, 68, 0.1);
+  font-size: 13px;
+  font-weight: 950;
+  content: "01";
+}
+
+.who-how-why div:nth-child(2)::before {
+  content: "02";
+}
+
+.who-how-why div:nth-child(3)::before {
+  content: "03";
+}
+
+.who-how-why h2 {
+  margin: 0 0 12px;
+  color: var(--ink);
+  font-size: clamp(24px, 2.4vw, 32px);
+  line-height: 1.18;
+}
+
+.who-how-why p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
 .cta {
   justify-content: space-between;
   margin-bottom: 76px;
@@ -921,6 +981,7 @@ details[open] {
   .feature-grid,
   .price-grid,
   .trust-grid,
+  .who-how-why,
   .steps,
   .split {
     grid-template-columns: 1fr;
@@ -967,6 +1028,7 @@ details[open] {
   }
 
   .section,
+  .who-how-why,
   .cta,
   .site-footer {
     width: min(100% - 28px, 1160px);
@@ -988,6 +1050,7 @@ details[open] {
   .feature-grid article,
   .price-card,
   .trust-grid article,
+  .who-how-why div,
   .steps li,
   .cta {
     padding: 23px;
