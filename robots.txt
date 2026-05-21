@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://guhara1.github.io/gandago_2/sitemap.xml
+Sitemap: https://gandago-2.pages.dev/sitemap.xml
