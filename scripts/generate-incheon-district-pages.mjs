@@ -17,14 +17,15 @@ const sortByKoreanName = (items) => [...items].sort((a, b) => koCollator.compare
 const districts = [
   { name: "강화군", slug: "ganghwa", board: "강화읍·선원·길상", intro: "강화군은 섬 지역 이동과 교량 접근 시간이 함께 작용해 예약 전 실제 위치와 방문 가능 시간을 넓게 확인해야 합니다.", points: ["강화대교·초지대교 동선", "숙소·펜션 방문 조건", "장거리 이동 시간 확인"], areas: ["강화읍", "선원·불은", "길상·화도"] },
   { name: "계양구", slug: "gyeyang", board: "계산·작전·효성", intro: "계양구는 서울 서부와 부천, 김포 동선이 겹쳐 퇴근 시간대 이동 변수와 주차 가능 여부를 함께 확인하는 편이 정확합니다.", points: ["계산역 생활권", "작전·효성 주거권", "서울 서부 인접 동선"], areas: ["계산", "작전·효성", "귤현·동양"] },
+  { name: "검단구", slug: "geomdan", board: "검단·마전·원당", intro: "검단구는 2026년 인천 행정체제 개편에 맞춰 현 서구 북부 생활권을 별도로 확인하는 안내입니다. 검단신도시와 마전, 원당은 이동 거리와 입주 단지 출입 조건이 달라 상담에서 주소 기준 확인이 필요합니다.", points: ["검단신도시 생활권", "마전·원당 주거권", "신규 행정구 기준 확인"], areas: ["검단신도시", "마전·불로", "원당·당하"] },
   { name: "남동구", slug: "namdong", board: "구월·논현·간석", intro: "남동구는 구월 상권과 논현 주거권, 간석 생활권의 방문 조건이 달라 주소 기준 상담이 필요합니다.", points: ["구월동 상권", "논현 주거권", "간석 이동 조건"], areas: ["구월", "논현", "간석·만수"] },
-  { name: "동구", slug: "dong", board: "송림·화수·만석", intro: "동구는 항만과 구도심 생활권이 가까워 보이지만 건물 출입 방식과 주차 조건에 따라 안내가 달라질 수 있습니다.", points: ["송림 구도심", "화수·만석 이동", "항만 인접 동선"], areas: ["송림", "화수", "만석"] },
   { name: "미추홀구", slug: "michuhol", board: "주안·용현·학익", intro: "미추홀구는 주안 상권과 용현·학익 주거권이 섞여 있어 방문 장소 유형과 시간대를 먼저 구분해야 합니다.", points: ["주안역 상권", "용현 주거권", "학익·문학 이동"], areas: ["주안", "용현", "학익·문학"] },
   { name: "부평구", slug: "bupyeong", board: "부평·삼산·청천", intro: "부평구는 유동 인구와 주거지가 함께 밀집해 있어 퇴근 시간, 건물 출입, 대기 가능 여부를 함께 확인합니다.", points: ["부평역 상권", "삼산 주거권", "청천·갈산 이동"], areas: ["부평", "삼산", "청천·갈산"] },
-  { name: "서구", slug: "seo", board: "청라·검단·가정", intro: "서구는 청라와 검단, 가정 생활권의 거리가 넓어 실제 주소와 이전 예약 위치에 따라 방문 가능 시간이 달라집니다.", points: ["청라 신도시", "검단 생활권", "가정·석남 이동"], areas: ["청라", "검단", "가정·석남"] },
+  { name: "서해구", slug: "seohae", board: "청라·가정·석남", intro: "서해구는 2026년 인천 행정체제 개편에 따라 현 서구 남부 생활권을 별도로 정리한 안내입니다. 청라와 가정, 석남은 도로 흐름과 주차 조건이 달라 예약 전 실제 주소 확인이 중요합니다.", points: ["청라 신도시", "가정·석남 이동", "2026 서해구 기준 확인"], areas: ["청라", "가정", "석남·신현"] },
   { name: "연수구", slug: "yeonsu", board: "송도·연수·청학", intro: "연수구는 송도 숙소와 오피스텔, 연수·청학 주거권의 출입 방식이 달라 상담 전 위치 확인이 중요합니다.", points: ["송도 숙소 출입", "연수 주거권", "청학·동춘 이동"], areas: ["송도", "연수", "청학·동춘"] },
+  { name: "영종구", slug: "yeongjong", board: "영종·운서·용유", intro: "영종구는 2026년 행정체제 개편으로 공항권과 영종도 생활권을 따로 확인하는 지역입니다. 숙소, 호텔, 공항 인접 동선은 이동 가능 시간과 출입 방식이 달라 전화 상담에서 먼저 확인해야 합니다.", points: ["공항권 이동 조건", "영종·운서 숙소", "용유·무의 생활권"], areas: ["영종", "운서", "용유·무의"] },
   { name: "옹진군", slug: "ongjin", board: "영흥·백령·덕적", intro: "옹진군은 도서 지역 특성상 즉시 방문보다 연결 동선과 실제 배정 가능성을 먼저 확인해야 합니다.", points: ["도서 지역 상담", "영흥 생활권", "방문 가능성 별도 확인"], areas: ["영흥", "백령", "덕적"] },
-  { name: "중구", slug: "jung", board: "영종·운서·동인천", intro: "중구는 영종 공항권과 동인천 구도심의 이동 축이 달라 숙소·호텔·주거지 출입 조건을 구분해 상담합니다.", points: ["영종·운서 숙소", "동인천 구도심", "공항권 이동 조건"], areas: ["영종·운서", "동인천", "신포·신흥"] },
+  { name: "제물포구", slug: "jemulpo", board: "동인천·신포·송림", intro: "제물포구는 2026년 인천 행정체제 개편에 맞춰 동인천과 신포, 송림 생활권을 묶어 확인하는 안내입니다. 구도심 상권과 항만 인접 동선은 건물 출입 방식과 주차 조건을 먼저 확인하는 편이 정확합니다.", points: ["동인천 구도심", "신포·신흥 상권", "송림·화수 생활권"], areas: ["동인천", "신포·신흥", "송림·화수"] },
 ];
 
 const priceCards = `
@@ -41,8 +42,8 @@ function directoryHtml() {
   const cards = sortByKoreanName(districts).map((district) => `          <a class="district-link-card" href="/areas/incheon/${district.slug}/"><strong>${district.name}</strong><span>${district.board} 생활권 기준 확인</span></a>`).join("\n");
   return `      <section class="district-directory" aria-label="인천 군구별 출장마사지 안내">
         <div class="area-section-head">
-          <div><p class="eyebrow">Incheon districts</p><h2>인천 10개 군·구별 가능 지역 안내</h2></div>
-          <p>2026년 5월 21일 현재 행정구역 기준으로 강화군, 계양구, 남동구, 동구, 미추홀구, 부평구, 서구, 연수구, 옹진군, 중구를 가나다순으로 정리했습니다.</p>
+          <div><p class="eyebrow">Incheon districts</p><h2>인천 2026년 2군·9구 가능 지역 안내</h2></div>
+          <p>인천광역시 행정체제 개편에 따라 2026년 7월 1일부터 적용되는 2군·9구 기준으로 강화군, 계양구, 검단구, 남동구, 미추홀구, 부평구, 서해구, 연수구, 영종구, 옹진군, 제물포구를 가나다순으로 정리했습니다.</p>
         </div>
         <div class="district-directory-grid">
 ${cards}
@@ -55,6 +56,7 @@ ${cards}
 function districtPage(district) {
   const title = `${district.name} 출장마사지, ${district.board} 방문 전 확인할 상담 기준 | 마사지KING`;
   const description = `${district.intro} ${district.areas.join("·")} 예약 전 주소, 출입 방식, 희망 시간대를 기준으로 안내합니다.`;
+  const topicName = `${district.name}${district.name.endsWith("구") ? "는" : "은"}`;
   const areaCards = district.areas.map((area) => `<article class="area-zone-card"><span>${district.name}</span><h3>${area}</h3><p>${area} 권역은 같은 ${district.name} 안에서도 건물 유형, 주차, 대기 가능 여부에 따라 방문 조건이 달라질 수 있습니다.</p><strong>주소 기준 확인</strong></article>`).join("\n          ");
   const reviews = [
     [`${district.areas[0]}`, "주소 확인", `${district.areas[0]} 문의에서 동 이름보다 상세 주소를 먼저 확인하니 안내가 빨라졌습니다. 가능 여부를 단정하지 않고 현재 배정 상황 기준으로 설명해 판단하기 쉬웠습니다.`],
@@ -100,7 +102,7 @@ function districtPage(district) {
         </div>
         <div class="area-hero-card" aria-label="${district.name} 상담 보드">
           <span>${district.name} 상담 보드</span>
-          <h2>${district.name}은 방문 위치와 출입 조건을 먼저 확인하세요</h2>
+          <h2>${topicName} 방문 위치와 출입 조건을 먼저 확인하세요</h2>
           <p class="area-hero-cta">${district.board} 생활권은 이동 축과 현장 조건이 다릅니다. 전화로 현재 배정 가능 흐름을 먼저 확인하세요.</p>
           <ul>
             <li>${district.points[0]}</li>
@@ -119,7 +121,7 @@ function districtPage(district) {
       <section class="area-dashboard" aria-label="${district.name} 출장마사지 권역 안내">
         <div class="area-dashboard-head">
           <p class="eyebrow">${district.name} board</p>
-          <h2>${district.name}은 군·구명보다 실제 방문 조건이 중요합니다</h2>
+          <h2>${topicName} 군·구명보다 실제 방문 조건이 중요합니다</h2>
           <p>${district.intro} 같은 ${district.name} 안에서도 숙소, 오피스텔, 주거지, 사무실에 따라 상담 기준이 달라질 수 있습니다.</p>
         </div>
         <div class="area-zone-grid">
