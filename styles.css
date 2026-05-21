@@ -94,25 +94,25 @@ p {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 11px;
   min-width: max-content;
   color: var(--ink);
   font-weight: 950;
   letter-spacing: 0;
 }
 
-.brand-mark {
-  display: grid;
-  place-items: center;
-  width: 38px;
-  height: 38px;
-  border-radius: 8px;
-  color: var(--white);
-  background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.16), transparent 44%),
-    var(--green-dark);
-  box-shadow: 0 12px 24px rgba(8, 57, 45, 0.22);
-  font-size: 18px;
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 136px;
+  height: 48px;
+  overflow: hidden;
+}
+
+.brand-logo img {
+  display: block;
+  width: 136px;
+  height: auto;
 }
 
 .nav {
@@ -722,22 +722,14 @@ details[open] {
 .footer-brand strong {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
   color: var(--ink);
   font-size: 18px;
 }
 
-.footer-brand strong::before {
-  display: inline-grid;
-  place-items: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 9px;
-  color: var(--white);
-  background: linear-gradient(135deg, var(--green), var(--green-dark));
-  content: "K";
-  font-size: 15px;
-  letter-spacing: 0;
+.footer-logo img {
+  display: block;
+  width: 166px;
+  height: auto;
 }
 
 .footer-tagline {
@@ -883,6 +875,11 @@ details[open] {
     overflow-x: auto;
     padding-bottom: 2px;
     scrollbar-width: thin;
+  }
+
+  .brand-logo,
+  .brand-logo img {
+    width: 112px;
   }
 
   .nav-item {

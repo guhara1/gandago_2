@@ -1,4 +1,4 @@
-$ErrorActionPreference = "Stop"
+﻿$ErrorActionPreference = "Stop"
 
 if ($PSScriptRoot) {
   $root = Split-Path -Parent $PSScriptRoot
@@ -446,8 +446,7 @@ function Render-Page($page) {
   <body>
     <header class="site-header" aria-label="상단 메뉴">
       <a class="brand" href="/" aria-label="마사지KING 홈">
-        <span class="brand-mark">K</span>
-        <span>마사지KING</span>
+        <span class="brand-logo" aria-hidden="true"><img src="/assets/massage_king_logo_transparent.png" alt=""></span>
       </a>
 $menu
       <a class="nav-cta" href="tel:05082024743">예약 문의</a>
