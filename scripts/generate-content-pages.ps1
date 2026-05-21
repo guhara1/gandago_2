@@ -27,6 +27,7 @@ $menu = @"
             <a href="/areas/seoul/">서울</a>
             <a href="/areas/gyeonggi/">경기</a>
             <a href="/areas/incheon/">인천</a>
+            <a href="/areas/busan/">부산</a>
           </div>
         </div>
         <div class="nav-item">
@@ -86,7 +87,7 @@ $menu = @"
 $pages = @(
   @{
     Path = "areas/index.html"; Title = "지역별 찾기"; Kicker = "Coverage";
-    Description = "서울, 경기, 인천 출장마사지 예약 가능 지역을 한 번에 확인하는 안내 페이지입니다.";
+    Description = "서울, 경기, 인천, 부산 출장마사지 예약 가능 지역을 한 번에 확인하는 안내 페이지입니다.";
     Lead = "마사지KING은 권역명을 많이 나열하기보다 실제 이동 가능성과 방문 환경을 기준으로 상담합니다.";
     Sections = @(
       @{H="지역 안내 원칙"; P="지역 페이지는 검색어 반복을 위해 만들지 않고, 예약자가 실제로 알아야 할 이동 조건과 상담 기준을 설명합니다."},
@@ -504,7 +505,7 @@ $sectionHtml
     <footer>
       <div>
         <strong>마사지KING</strong>
-        <p>서울 · 경기 · 인천 출장마사지 예약 안내</p>
+        <p>서울 · 경기 · 인천 · 부산 출장마사지 예약 안내</p>
       </div>
       <div>
         <p>예약 전화 <a href="tel:05082024743">0508-202-4743</a></p>
