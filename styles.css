@@ -778,6 +778,30 @@ details[open] {
   box-shadow: 0 10px 26px rgba(15, 32, 26, 0.06);
 }
 
+.footer-business {
+  width: 100%;
+  margin: 12px 0 2px;
+  padding: 14px 16px;
+  border: 1px solid rgba(15, 95, 68, 0.14);
+  border-radius: 8px;
+  background: rgba(249, 248, 244, 0.72);
+}
+
+.footer-business p {
+  display: flex;
+  gap: 10px;
+  margin: 4px 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.footer-business span {
+  min-width: 76px;
+  color: var(--ink);
+  font-weight: 900;
+}
+
 .footer-phone a {
   font-size: 18px;
 }
