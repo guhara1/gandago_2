@@ -513,17 +513,88 @@
 }
 
 .area-page .content-long {
-  width: min(980px, 100%);
+  position: relative;
+  width: min(1080px, 100%);
   margin-inline: auto;
+  counter-reset: area-section;
 }
 
 .area-page .content-panel {
-  grid-template-columns: minmax(180px, 0.32fr) minmax(0, 1fr);
-  padding: clamp(30px, 4.6vw, 48px);
+  counter-increment: area-section;
+  display: grid;
+  grid-template-columns: minmax(150px, 0.28fr) minmax(0, 1fr);
+  gap: clamp(24px, 5vw, 72px);
+  padding: clamp(38px, 6vw, 72px) 0;
+  border: 0;
+  border-bottom: 1px solid rgba(17, 26, 23, 0.12);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.area-page .content-panel:first-child {
+  border-top: 1px solid rgba(17, 26, 23, 0.12);
+}
+
+.area-page .content-panel::before {
+  display: none;
 }
 
 .area-page .content-panel h2 {
+  position: relative;
+  display: grid;
+  gap: 14px;
+  align-content: start;
+  max-width: none;
+  color: var(--ink);
+  font-size: clamp(22px, 2.4vw, 30px);
+}
+
+.area-page .content-panel h2::before {
+  content: "0" counter(area-section);
+  width: max-content;
+  padding: 8px 10px;
+  border-radius: 999px;
   color: var(--green-dark);
+  background: rgba(15, 95, 68, 0.08);
+  font-size: 13px;
+  font-weight: 950;
+  letter-spacing: 0;
+}
+
+.area-page .content-panel h2::after {
+  width: 42px;
+  height: 2px;
+  background: var(--gold);
+  content: "";
+}
+
+.area-page .content-panel p,
+.area-page .content-panel ul {
+  max-width: 760px;
+}
+
+.area-page .content-panel p {
+  color: #20302a;
+  font-size: 18px;
+  line-height: 2;
+}
+
+.area-page .content-panel p + p {
+  margin-top: 22px;
+}
+
+.area-page .content-panel ul {
+  padding: 24px 26px 24px 46px;
+  border: 1px solid rgba(17, 26, 23, 0.09);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.74);
+  box-shadow: var(--shadow-sm);
+}
+
+.area-page .content-panel li {
+  padding-left: 4px;
 }
 
 .who-how-why {
@@ -621,6 +692,10 @@
 
   .area-page .page-meta {
     grid-template-columns: 1fr;
+  }
+
+  .area-page .content-panel {
+    gap: 20px;
   }
 
   .page-cta {
