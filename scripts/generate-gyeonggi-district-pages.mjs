@@ -248,22 +248,6 @@ ${cards}
 `;
 }
 
-function allDistrictDirectoryHtml() {
-  const allDistricts = groups.flatMap((group) => group.districts.map((district) => ({ ...district, city: group.city, citySlug: group.citySlug })));
-  const cards = sortByKoreanName(allDistricts).map((district) => `          <a class="district-link-card" href="/areas/gyeonggi/${district.citySlug}/${district.slug}/"><strong>${district.name}</strong><span>${district.city} ${district.board} 기준 상담</span></a>`).join("\n");
-  return `      <section class="district-directory all-district-directory" aria-label="경기도 전체 행정구 바로가기">
-        <div class="area-section-head">
-          <div><p class="eyebrow">Gyeonggi districts</p><h2>경기도 전체 행정구 바로가기</h2></div>
-          <p>수원, 성남, 안양, 부천, 안산, 고양, 용인처럼 구 단위 확인이 필요한 지역은 여기에서 바로 이동할 수 있습니다. 시군 페이지를 한 번 더 거치지 않고 원하는 행정구의 상담 기준과 이동 조건을 먼저 확인하도록 정리했습니다.</p>
-        </div>
-        <div class="district-directory-grid">
-${cards}
-        </div>
-      </section>
-
-`;
-}
-
 for (const group of groups) {
   const cityDir = path.join(root, "areas", "gyeonggi", group.citySlug);
   const cityPath = path.join(cityDir, "index.html");
@@ -282,7 +266,6 @@ for (const group of groups) {
 
 let gyeonggiHtml = await fs.readFile(gyeonggiPath, "utf8");
 gyeonggiHtml = gyeonggiHtml.replace(/\s*<section class="district-directory all-district-directory"[\s\S]*?<\/section>\s*/, "\n\n");
-gyeonggiHtml = gyeonggiHtml.replace(/\s*<section class="area-commerce"/, `\n\n${allDistrictDirectoryHtml()}      <section class="area-commerce"`);
 await fs.writeFile(gyeonggiPath, gyeonggiHtml, "utf8");
 
 console.log(`Generated ${groups.reduce((sum, group) => sum + group.districts.length, 0)} Gyeonggi district pages.`);
