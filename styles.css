@@ -387,7 +387,7 @@ h1 {
 
 .section,
 .cta,
-footer {
+.site-footer {
   width: min(1160px, calc(100% - 40px));
   margin-inline: auto;
 }
@@ -688,25 +688,98 @@ details[open] {
   box-shadow: none;
 }
 
-footer {
-  display: flex;
-  justify-content: space-between;
-  gap: 24px;
+.site-footer {
+  display: grid;
+  grid-template-columns: minmax(260px, 1.2fr) minmax(180px, 0.7fr) minmax(280px, 1fr);
+  gap: clamp(22px, 4vw, 54px);
+  width: min(100% - 40px, 1160px);
+  margin: 0 auto;
   padding: 34px 0 46px;
   border-top: 1px solid var(--line);
 }
 
-footer p {
+.site-footer p {
   margin: 8px 0 0;
 }
 
-footer strong,
-footer a {
+.site-footer strong,
+.site-footer a {
   font-weight: 950;
 }
 
-footer a {
+.site-footer a {
   color: var(--green);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.footer-brand strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+  font-size: 18px;
+}
+
+.footer-brand strong::before {
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  color: var(--white);
+  background: linear-gradient(135deg, var(--green), var(--green-dark));
+  content: "K";
+  font-size: 15px;
+  letter-spacing: 0;
+}
+
+.footer-disclaimer {
+  max-width: 520px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.footer-links,
+.footer-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.footer-links {
+  gap: 10px;
+}
+
+.footer-profile > span {
+  margin-bottom: 12px;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 950;
+}
+
+.footer-socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-bottom: 8px;
+}
+
+.footer-socials a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 0 14px;
+  border: 1px solid rgba(15, 95, 68, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--green-dark);
+  text-decoration: none;
+  box-shadow: 0 10px 26px rgba(15, 32, 26, 0.06);
+}
+
+.footer-phone a {
+  font-size: 18px;
 }
 
 @media (max-width: 1080px) {
@@ -777,9 +850,9 @@ footer a {
 
   .cta,
   .price-note,
-  footer {
+  .site-footer {
     align-items: flex-start;
-    flex-direction: column;
+    grid-template-columns: 1fr;
   }
 }
 
@@ -790,7 +863,7 @@ footer a {
 
   .section,
   .cta,
-  footer {
+  .site-footer {
     width: min(100% - 28px, 1160px);
   }
 
