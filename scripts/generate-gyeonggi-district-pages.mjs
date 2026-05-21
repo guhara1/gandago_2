@@ -11,6 +11,9 @@ const footer = footers.at(-1);
 
 if (!header || !footer) throw new Error("Could not find shared header or footer.");
 
+const koCollator = new Intl.Collator("ko-KR");
+const sortByKoreanName = (items) => [...items].sort((a, b) => koCollator.compare(a.name, b.name));
+
 const groups = [
   {
     city: "수원시", citySlug: "suwon", cityLabel: "수원 4개 구",
@@ -231,7 +234,7 @@ ${priceCards}
 }
 
 function directoryHtml(group) {
-  const cards = group.districts.map((district) => `          <a class="district-link-card" href="/areas/gyeonggi/${group.citySlug}/${district.slug}/"><strong>${district.name}</strong><span>${district.board} 생활권 기준 확인</span></a>`).join("\n");
+  const cards = sortByKoreanName(group.districts).map((district) => `          <a class="district-link-card" href="/areas/gyeonggi/${group.citySlug}/${district.slug}/"><strong>${district.name}</strong><span>${district.board} 생활권 기준 확인</span></a>`).join("\n");
   return `      <section class="district-directory city-district-directory" aria-label="${group.city} 행정구별 출장마사지 안내">
         <div class="area-section-head">
           <div><p class="eyebrow">District shortcut</p><h2>${group.city} 행정구 바로가기</h2></div>
@@ -246,7 +249,8 @@ ${cards}
 }
 
 function allDistrictDirectoryHtml() {
-  const cards = groups.flatMap((group) => group.districts.map((district) => `          <a class="district-link-card" href="/areas/gyeonggi/${group.citySlug}/${district.slug}/"><strong>${district.name}</strong><span>${group.city} ${district.board} 기준 상담</span></a>`)).join("\n");
+  const allDistricts = groups.flatMap((group) => group.districts.map((district) => ({ ...district, city: group.city, citySlug: group.citySlug })));
+  const cards = sortByKoreanName(allDistricts).map((district) => `          <a class="district-link-card" href="/areas/gyeonggi/${district.citySlug}/${district.slug}/"><strong>${district.name}</strong><span>${district.city} ${district.board} 기준 상담</span></a>`).join("\n");
   return `      <section class="district-directory all-district-directory" aria-label="경기도 전체 행정구 바로가기">
         <div class="area-section-head">
           <div><p class="eyebrow">Gyeonggi districts</p><h2>경기도 전체 행정구 바로가기</h2></div>

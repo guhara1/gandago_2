@@ -13,6 +13,9 @@ if (!header || !footer) {
   throw new Error("Could not find shared header or footer in Seoul page.");
 }
 
+const koCollator = new Intl.Collator("ko-KR");
+const sortByKoreanName = (items) => [...items].sort((a, b) => koCollator.compare(a.name, b.name));
+
 const districts = [
   { name: "강남구", slug: "gangnam", board: "강남·역삼·삼성", intro: "강남구는 업무지구와 주거지가 촘촘히 겹쳐 퇴근 시간, 건물 출입, 주차 조건을 함께 확인해야 합니다.", points: ["오피스텔·호텔 출입 방식", "퇴근 시간 이동 변수", "강남대로·테헤란로 동선"], areas: ["강남·역삼", "삼성·대치", "청담·논현"] },
   { name: "강동구", slug: "gangdong", board: "천호·길동·고덕", intro: "강동구는 동부 생활권과 주거 단지가 넓게 이어져 실제 주소와 희망 시간을 기준으로 상담하는 편이 정확합니다.", points: ["주거 단지 출입", "동부권 이동 시간", "야간 방문 조건"], areas: ["천호·성내", "길동·둔촌", "고덕·명일"] },
@@ -306,7 +309,7 @@ ${priceCards}
 }
 
 function directoryHtml() {
-  const cards = districts.map((d) => `          <a class="district-link-card" href="/areas/seoul/${d.slug}/"><strong>${d.name}</strong><span>${d.board} 생활권 기준 확인</span></a>`).join("\n");
+  const cards = sortByKoreanName(districts).map((d) => `          <a class="district-link-card" href="/areas/seoul/${d.slug}/"><strong>${d.name}</strong><span>${d.board} 생활권 기준 확인</span></a>`).join("\n");
   return `      <section class="district-directory" aria-label="서울 행정구별 출장마사지 안내">
         <div class="area-section-head">
           <div><p class="eyebrow">Seoul districts</p><h2>서울 25개 행정구별 가능 지역 안내</h2></div>
@@ -328,9 +331,8 @@ for (const district of districts) {
 
 const marker = `      <section class="area-commerce" aria-label="서울 출장마사지 메뉴 가격">`;
 let nextSeoulHtml = seoulHtml;
-if (!nextSeoulHtml.includes('class="district-directory"')) {
-  nextSeoulHtml = nextSeoulHtml.replace(marker, directoryHtml() + marker);
-}
+nextSeoulHtml = nextSeoulHtml.replace(/\s*<section class="district-directory"[\s\S]*?<\/section>\s*/, "\n\n");
+nextSeoulHtml = nextSeoulHtml.replace(/\s*<section class="area-commerce" aria-label="서울 출장마사지 메뉴 가격">/, `\n\n${directoryHtml()}      <section class="area-commerce" aria-label="서울 출장마사지 메뉴 가격">`);
 await fs.writeFile(seoulPath, nextSeoulHtml, "utf8");
 
 console.log(`Generated ${districts.length} Seoul district pages.`);

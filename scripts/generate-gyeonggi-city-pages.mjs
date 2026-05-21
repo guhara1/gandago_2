@@ -11,6 +11,9 @@ const footer = footers.at(-1);
 
 if (!header || !footer) throw new Error("Could not find shared header or footer.");
 
+const koCollator = new Intl.Collator("ko-KR");
+const sortByKoreanName = (items) => [...items].sort((a, b) => koCollator.compare(a.name, b.name));
+
 const cities = [
   { name: "수원시", slug: "suwon", board: "영통·광교·인계", intro: "수원시는 영통 업무권, 광교 신도시, 인계동 상권의 방문 조건이 달라 주소와 시간대 확인이 중요합니다.", points: ["영통·광교 이동", "인계동 상권 출입", "아파트 주차 확인"], areas: ["영통·광교", "인계·권선", "팔달·장안"] },
   { name: "성남시", slug: "seongnam", board: "분당·판교·수정", intro: "성남시는 분당 주거권과 판교 업무권, 수정·중원 생활권이 나뉘어 실제 위치 기준 상담이 필요합니다.", points: ["판교 업무권", "분당 주거권", "수정·중원 이동"], areas: ["분당", "판교", "수정·중원"] },
@@ -207,7 +210,7 @@ ${priceCards}
 }
 
 function directoryHtml() {
-  const cards = cities.map((city) => `          <a class="district-link-card" href="/areas/gyeonggi/${city.slug}/"><strong>${city.name}</strong><span>${city.board} 생활권 기준 확인</span></a>`).join("\n");
+  const cards = sortByKoreanName(cities).map((city) => `          <a class="district-link-card" href="/areas/gyeonggi/${city.slug}/"><strong>${city.name}</strong><span>${city.board} 생활권 기준 확인</span></a>`).join("\n");
   return `      <section class="district-directory" aria-label="경기도 시군별 출장마사지 안내">
         <div class="area-section-head">
           <div><p class="eyebrow">Gyeonggi cities</p><h2>경기도 31개 시·군별 가능 지역 안내</h2></div>
@@ -229,7 +232,11 @@ for (const city of cities) {
 
 const marker = `      <section class="area-commerce" aria-label="경기 출장마사지 메뉴 가격">`;
 let nextHtml = sourceHtml;
-if (!nextHtml.includes('aria-label="경기도 시군별 출장마사지 안내"')) {
+nextHtml = nextHtml.replace(/\s*<section class="district-directory" aria-label="경기도 시군별 출장마사지 안내">[\s\S]*?<\/section>\s*/, "\n\n");
+const allDistrictMarker = `      <section class="district-directory all-district-directory"`;
+if (nextHtml.includes(allDistrictMarker)) {
+  nextHtml = nextHtml.replace(allDistrictMarker, directoryHtml() + allDistrictMarker);
+} else {
   nextHtml = nextHtml.replace(marker, directoryHtml() + marker);
 }
 await fs.writeFile(pagePath, nextHtml, "utf8");
