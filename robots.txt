@@ -17,4 +17,5 @@ User-agent: *
 Allow: /
 
 Sitemap: https://massageking.club/sitemap.xml
+Sitemap: https://massageking.club/sitemap1.xml
 Sitemap: https://massageking.club/rss.xml
