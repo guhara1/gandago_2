@@ -107,6 +107,8 @@ function dongPage(group, dong) {
     <meta name="description" content="${description}">
     <meta name="robots" content="noindex,follow,max-image-preview:large">
     <meta name="format-detection" content="telephone=no">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="shortcut icon" href="/favicon.svg">
     <link rel="canonical" href="https://massageking.club/">
     <link rel="alternate" type="application/rss+xml" title="마사지KING 업데이트" href="https://massageking.club/rss.xml">
     <meta property="og:type" content="article">
